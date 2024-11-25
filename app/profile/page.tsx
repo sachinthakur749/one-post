@@ -36,7 +36,6 @@ export default function BlogPostForm() {
         },
         body: JSON.stringify(formData),
       });
-      console.log(response);
       setMessage("Blog post created successfully!");
       setFormData({ title: "", body: "", imageUrl: "", authorName: "" });
     } catch (error) {
