@@ -14,6 +14,7 @@ const ShortBlogCard = ({ title, body, imageUrl, authorName }: any) => {
           height={300}
           className="w-full h-[40%] object-cover  "
         />
+
         <div className="space-y-2">
           <div className="flex items-center gap-4">
             <Avatar className="h-8 w-8 aspect-square">
@@ -36,7 +37,7 @@ const ShortBlogCard = ({ title, body, imageUrl, authorName }: any) => {
           />
         </div>
         <div className="flex justify-between items-center">
-          <Badge variant="secondary">Nov 12,2024</Badge>
+          <Badge variant="secondary">Nov 12,2025</Badge>
         </div>
       </div>
     </>
