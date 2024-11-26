@@ -12,16 +12,25 @@ const BlogSection = async () => {
     <div>
       <h2 className="text-[24px] font-semibold mb-6">Related Tech Stories</h2>
       <div className="grid grid-cols-3 gap-[50px]">
-        {data.map((blog) => (
-          <Link key={blog.id} href={`/blog/${blog?.slug}`}>
-            <ShortBlogCard
-              title={blog.title}
-              body={blog.body}
-              imageUrl={blog.imageUrl}
-              authorName={blog?.authorName}
-            />
-          </Link>
-        ))}
+        {data.map(
+          (blog: {
+            id: React.Key | null | undefined;
+            slug: any;
+            title: any;
+            body: any;
+            imageUrl: any;
+            authorName: any;
+          }): any => (
+            <Link key={blog.id} href={`/blog/${blog?.slug}`}>
+              <ShortBlogCard
+                title={blog.title}
+                body={blog.body}
+                imageUrl={blog.imageUrl}
+                authorName={blog?.authorName}
+              />
+            </Link>
+          )
+        )}
       </div>
     </div>
   );

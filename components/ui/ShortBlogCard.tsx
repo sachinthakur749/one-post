@@ -3,7 +3,7 @@ import React from "react";
 import { Badge } from "./badge";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 
-const ShortBlogCard = ({ title, body, imageUrl, authorName }) => {
+const ShortBlogCard = ({ title, body, imageUrl, authorName }: any) => {
   return (
     <>
       <div className=" space-y-3 h-[500px] ">
