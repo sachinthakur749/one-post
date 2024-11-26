@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css"; // import the styles for the editor
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css"; // Import styles here since they don't depend on SSR
+
+// Dynamically import ReactQuill without SSR
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function BlogPostForm() {
   const [formData, setFormData] = useState({
@@ -36,10 +39,14 @@ export default function BlogPostForm() {
         },
         body: JSON.stringify(formData),
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to create blog post");
+      }
+
       setMessage("Blog post created successfully!");
       setFormData({ title: "", body: "", imageUrl: "", authorName: "" });
     } catch (error) {
-      console.log(error);
       console.error("Error creating blog post:", error);
       setMessage("An error occurred. Please try again.");
     }
