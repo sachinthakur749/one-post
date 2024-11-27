@@ -1,12 +1,14 @@
 import { baseUrl } from "@/lib/baseURL";
+import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import React from "react";
 
 async function page({ params }: { params: Promise<{ slug: string }> }) {
-  const blog = await fetch(`${baseUrl}/api/blogs/${(await params).slug}`, {
-    cache: "no-cache",
+  const data = await prisma.blog.findUnique({
+    where: {
+      slug: (await params).slug,
+    },
   });
-  const data = await blog.json();
 
   return (
     <>
@@ -18,12 +20,12 @@ async function page({ params }: { params: Promise<{ slug: string }> }) {
             alt="sds"
             width={100}
             height={100}
-            src={data.imageUrl}
+            src={data?.imageUrl || ""}
             className="w-full h-[450px] object-cover rounded-[10px] "
           />
         </div>
 
-        <div dangerouslySetInnerHTML={{ __html: data?.body }} />
+        <div dangerouslySetInnerHTML={{ __html: data?.body || "" }} />
       </div>
     </>
   );

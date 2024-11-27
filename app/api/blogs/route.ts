@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import slugify from "slugify";
-
-const prisma = new PrismaClient();
 
 async function generateUniqueSlug(title: string): Promise<string> {
   let slug = slugify(title, { lower: true, strict: true });

@@ -1,12 +1,21 @@
 import React from "react";
 import ShortBlogCard from "./ShortBlogCard";
 import Link from "next/link";
+import { prisma } from "@/lib/prisma";
 
 const BlogSection = async () => {
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-  const response = await fetch(`${baseUrl}/api/blogs`);
-  const data = await response.json();
+  const data = await prisma.blog.findMany({
+    select: {
+      id: true,
+      slug: true,
+      title: true,
+      body: true,
+      imageUrl: true,
+      authorName: true,
+    },
+  });
 
   return (
     <div>
