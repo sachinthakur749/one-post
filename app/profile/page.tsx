@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css"; // Import styles here since they don't depend on SSR
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 // Dynamically import ReactQuill without SSR
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
@@ -53,72 +55,69 @@ export default function BlogPostForm() {
   };
 
   return (
-    <div className="p-4 max-w-3xl mx-auto">
+    <div className="p-4 w-full mx-auto">
       <h1 className="text-2xl font-bold mb-6">Add Blog Post</h1>
-      <form onSubmit={handleSubmit} className="flex space-x-8">
-        <div className="flex-1">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label htmlFor="title" className="block font-medium mb-1">
               Title
             </label>
-            <input
-              type="text"
-              id="title"
+            <Input
               name="title"
-              value={formData.title}
+              id="title"
               onChange={handleChange}
+              value={formData?.title}
+              type="text"
+              placeholder="Enter blog title"
               required
-              className="w-full border border-gray-300 p-2 rounded"
             />
           </div>
-          <div className="mt-4">
+          <div>
             <label htmlFor="imageUrl" className="block font-medium mb-1">
               Image URL
             </label>
-            <input
+            <Input
               type="url"
               id="imageUrl"
               name="imageUrl"
               value={formData.imageUrl}
               onChange={handleChange}
+              placeholder="Enter image URL"
               required
-              className="w-full border border-gray-300 p-2 rounded"
             />
           </div>
-          <div className="mt-4">
+          <div>
             <label htmlFor="authorName" className="block font-medium mb-1">
               Author Name
             </label>
-            <input
+            <Input
               type="text"
               id="authorName"
               name="authorName"
               value={formData.authorName}
               onChange={handleChange}
+              placeholder="Enter author name"
               required
-              className="w-full border border-gray-300 p-2 rounded"
             />
           </div>
         </div>
-        <div className="flex-1">
-          <div>
-            <label htmlFor="body" className="block font-medium mb-1">
-              Body
-            </label>
-            <ReactQuill
-              value={formData.body}
-              onChange={handleEditorChange}
-              className="w-full h-96 border border-gray-300 p-2 rounded"
-              theme="snow"
-            />
-          </div>
+
+        <div>
+          <label htmlFor="body" className="block font-medium mb-2">
+            Body
+          </label>
+          <ReactQuill
+            value={formData.body}
+            onChange={handleEditorChange}
+            className="w-full h-[400px] border border-gray-300 rounded"
+            theme="snow"
+          />
         </div>
-        <button
-          type="submit"
-          className="mt-6 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        >
-          Submit
-        </button>
+
+        <div className="text-right !mt-[75px]">
+          <Button type="submit">Submit</Button>
+        </div>
       </form>
 
       {message && (

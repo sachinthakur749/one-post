@@ -8,10 +8,12 @@ datasource db {
 }
 
 model Blog {
-  id         String @id @default(auto()) @map("_id") @db.ObjectId
-  slug       String @unique
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  slug       String   @unique
   title      String
   body       String
   imageUrl   String
   authorName String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
