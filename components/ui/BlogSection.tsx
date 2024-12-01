@@ -7,6 +7,12 @@ import { Blog } from "@/lib/types";
 const BlogSection = async () => {
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+  await prisma.blog.updateMany({
+    data: {
+      createdAt: new Date(), // Set createdAt to the current date and time
+    },
+  });
+
   const data = await prisma.blog.findMany({
     select: {
       id: true,
